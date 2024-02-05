@@ -13,3 +13,13 @@ body{
     min-height: 100vh;
     background: #5372f0;
 }
+.container {
+    width: 690px;
+    background: #fff;
+    border-radius: 7px;
+    padding: 30px;
+}
+.wrapper{
+    border-radius: 5px;
+    border: 1px solid #bbb;
+}
