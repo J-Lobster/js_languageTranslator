@@ -45,14 +45,15 @@ body{
     padding: 10px 15px;
 }
 
+.controls {
+    list-style: none;
+    padding: 12px 15px;
+}
+
 .controls, li, .icons, .icons i {
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-.controls {
-    list-style: none;
-    padding: 12px 15px;
 }
 
 .controls .row.from .icons {
@@ -89,4 +90,16 @@ body{
     color: #9f9f9f;
     font-size: 16px;
     cursor: pointer;
+}
+
+.container button {
+    width: 100%;
+    padding: 14px;
+    margin-top:  20px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 17px;
+    border-radius: 5px;
+    background: #bbb;
 }
