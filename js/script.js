@@ -32,30 +32,38 @@ exchangeIcon.addEventListener("click", () => {
 
 translateBtn.addEventListener("click", () => {
     let text = fromText.value,
-    translateFrom = selectTag[0].value, // getting fromSelect tag value
-    translateTo = selectTag[1].value;   // getting toSelect tag value
+    translateFrom = selectTag[0].value, // getting fromSelect tag value.
+    translateTo = selectTag[1].value;   // getting toSelect tag value.
+    if(!text) return;
+    toText.setAttribute("placeholder", "Translating...");
     let apiUrl = `https://api.mymemory.translated.net/get?q=${text}&langpair=${translateFrom}|${translateTo}`;
-    // fetching api response and returning it with parsing into js obj
-    // add in another then method receiving that obj
+    // fetching api response and returning it with parsing into js obj.
+    // add in another then method receiving that obj.
     fetch(apiUrl).then(res => res.json()).then(data => {
         toText.value = data.responseData.translatedText;
+        toText.setAttribute("placeholder", "Translation");
     });
 });
 
 icons.forEach(icon => {
     icon.addEventListener("click", ({target}) => {
         if(target.classList.contains("fa-copy")) {
-            console.log(target.classList)
+            // when the copy icon is clicked, it will allow you to copy fromTextarea value or toTextarea value.
             if(target.id == "from") {
-                console.log("from copy icon clicked")
+                navigator.clipboard.writeText(fromText.value);
             } else {
-                console.log("to copy icon clicked")
+                navigator.clipboard.writeText(toText.value);
             } 
         } else {
-            console.log("Speech icon clicked")
+            let utterance;
+            if(target.id == "from") {
+                utterance = new SpeechSynthesisUtterance(fromText.value);
+                utterance.lang = selectTag[0].value; // setting utterance language fromSelect tag value.
+            } else {
+                utterance = new SpeechSynthesisUtterance(toText.value);
+                utterance.lang = selectTag[1].value; // setting utterance language toSelect tag value.
+            }
+            speechSynthesis.speak(utterance); //speak the the value that has been passed.
         }
     });
 });
-
-// 2.25.24 On youtube tutorial you are on 26:01.
-// review classList method.
